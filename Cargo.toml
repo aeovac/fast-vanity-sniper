@@ -1,0 +1,24 @@
+[package]
+name = "sniper"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+fastwebsockets = { version = "0.10.0", features = ["hyper", "upgrade"] }
+hyper-rustls = { version = "0.27.5", features = ["http2"] }
+hyper = { version = "1.6.0", features = ["client", "http2", "http1" ] }
+rustls = "0.23.27"
+tokio = { version = "1.45.0", features = ["full"] }
+flate2 = { version = "1.0", optional = true, features = ["zlib"] }
+serde = { version = "*", features = ["derive"]}
+bytes = "1.5"
+simd-json = { version = "0.15.1", features = ["serde"] }
+
+[build-dependencies]
+winapi = { version = "0.3", features = ["winsock2"] }
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
